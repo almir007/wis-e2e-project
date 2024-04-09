@@ -1,10 +1,10 @@
 import {HomePage} from "../page-object/home-page";
 
 const homepageClass = new HomePage();
-describe("Verifying Homepage", () => {
-    // This is a test to verify some of the homepage content
-    it("content", () => {
-        cy.visit('')
+
+describe("Homepage Content Verification", () => {
+    it("should ensure elements are present and functional", () => {
+        cy.visit('/')
         homepageClass.verifyHomePageHeaderIsVisible();
         homepageClass.verifyCookieBannerIsVisible();
         homepageClass.clickOnAcceptCookiesButton();

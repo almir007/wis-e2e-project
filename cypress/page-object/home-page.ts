@@ -1,3 +1,6 @@
+
+const logoElement = "[class*='col-lg-2 logo']";
+
 export class HomePage {
 
     /**
@@ -65,38 +68,80 @@ export class HomePage {
     verifySeeMoreOperatorsButtonIsNotVisible = () => this.seeMoreOperatorsButton().scrollIntoView().should("not.be.visible");
 
     clickOnOperatorLogoTitle(title: string) {
-        this.getOperatorLogoTitle(title).filter(':visible').parents('a').invoke("attr", "target", "_self").click();
+        this.getOperatorLogoTitle(title)
+            .filter(':visible')
+            .parents('a')
+            .invoke("attr", "target", "_self")
+            .click();
     }
 
     clickOnOperatorReadReviewTitle(title: string, reviewText: string) {
-        this.getOperatorLogoTitle(title).filter(':visible').parents('a').siblings('a').contains(reviewText).invoke("attr", "target", "_self").click();
+        this.getOperatorLogoTitle(title)
+            .filter(':visible')
+            .parents('a').siblings('a')
+            .contains(reviewText)
+            .invoke("attr", "target", "_self")
+            .click();
     }
 
     clickClaimBonusButton(url: string) {
-        return cy.get(`[href="${url}"]`).filter(':visible').invoke("attr", "target", "_self").click();
+        return cy.get(`[href="${url}"]`)
+            .filter(':visible')
+            .invoke("attr", "target", "_self")
+            .click();
     }
 
     verifyLastOperatorIsVisibleWhenExpanded(operatorLogoName: string, orderNumber: number) {
-        this.getOperatorLogoTitle(operatorLogoName).filter(':visible').scrollIntoView().parents('a').siblings("[class*='featured-card--index']").should("contain", orderNumber).should("be.visible");
+        this.getOperatorLogoTitle(operatorLogoName)
+            .filter(':visible')
+            .scrollIntoView()
+            .parents('a')
+            .siblings("[class*='featured-card--index']")
+            .should("contain", orderNumber)
+            .should("be.visible");
     }
 
     verifyBackgroundColourWhenHoveredOverClaimBonusButton(title: string) {
         //this.getClaimBonusButton().first().realHover().should("have.css", "background-color", "rgb(255, 246, 226)");
         //this.claimBonusButton().filter(':visible').should('have.length', 6).first().realHover().should("have.css", "background-color", "rgb(255, 246, 226)");
-        this.getOperatorLogoTitle(title).filter(':visible').parents("[class*='col-lg-2 logo']").siblings("[class*='featured-card--links']").find("a").realHover().should("have.css", "background-color", "rgb(255, 246, 226)");
+        this.getOperatorLogoTitle(title)
+            .filter(':visible')
+            .parents(logoElement)
+            .siblings("[class*='featured-card--links']")
+            .find("a")
+            .realHover()
+            .should("have.css", "background-color", "rgb(255, 246, 226)");
     }
 
     verifyClickingCloseButtonHidesFeatures(operatorLogoName: string) {
-        this.getOperatorLogoTitle(operatorLogoName).filter(':visible').parents("[class*='col-lg-2 logo']").siblings("[class*='d-none d-lg-block p-0 show-more-wrapper']").contains('Close').click();
-        this.getOperatorLogoTitle(operatorLogoName).filter(':visible').parents("[class*='col-lg-2 logo']").siblings("[class*='d-none d-lg-block p-0 show-more-wrapper']").contains('Details').should("be.visible");
+        this.getOperatorLogoTitle(operatorLogoName)
+            .filter(':visible')
+            .parents(logoElement)
+            .siblings("[class*='d-none d-lg-block p-0 show-more-wrapper']")
+            .contains('Close')
+            .click();
+        this.getOperatorLogoTitle(operatorLogoName)
+            .filter(':visible')
+            .parents(logoElement)
+            .siblings("[class*='d-none d-lg-block p-0 show-more-wrapper']")
+            .contains('Details')
+            .should("be.visible");
     }
 
     verifyOperatorOrderNumber(operatorLogoName: string, orderNumber: number) {
-        this.getOperatorLogoTitle(operatorLogoName).filter(':visible').parents('a').siblings("[class*='featured-card--index']").should("contain", orderNumber).should("be.visible");
+        this.getOperatorLogoTitle(operatorLogoName)
+            .filter(':visible')
+            .parents('a')
+            .siblings("[class*='featured-card--index']")
+            .should("contain", orderNumber)
+            .should("be.visible");
     }
 
     verifyOperatorBulletListText(operatorLogoName: string, bulletList: string[]) {
-        this.getOperatorLogoTitle(operatorLogoName).filter(':visible').parents("[class*='col-lg-2 logo']").siblings('.bg-dark-35').within(() => {
+        this.getOperatorLogoTitle(operatorLogoName).filter(':visible')
+            .parents(logoElement)
+            .siblings('.bg-dark-35')
+            .within(() => {
             cy.contains(bulletList[0]).should("be.visible");
             cy.contains(bulletList[1]).should("be.visible");
             cy.contains(bulletList[2]).should("be.visible");

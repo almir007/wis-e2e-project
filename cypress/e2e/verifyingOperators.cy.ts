@@ -6,7 +6,7 @@ const homePageClass = new HomePage();
 beforeEach(() => {
         cy.visit('/');
         Cypress.on("uncaught:exception", (err, runnable) => {
-                return false;
+            return false;
         });
     }
 )
