@@ -2,10 +2,10 @@
   "name": "wis-e2e",
   "version": "1.0.0",
   "description": "",
-  "main": "cypress.config.js",
+  "main": "cypress.config.ts",
   "scripts": {
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run --browser chrome"
   },
   "keywords": [],
   "author": "",
